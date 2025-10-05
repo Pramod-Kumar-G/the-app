@@ -7,9 +7,9 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: dwk-cluster
   GKE_ZONE: europe-north1-b
-  REGISTRY: europe-north1-docker.pkg.dev
-  REPOSITORY: my-repository
-  IMAGE: dwk-environments
+  REGISTRY: asia-south1-docker.pkg.dev
+  REPOSITORY: kubesub
+  IMAGE: the-app
   SERVICE: dwk-environments
   BRANCH: ${{ github.ref_name }}
 
