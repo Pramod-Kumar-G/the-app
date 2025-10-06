@@ -5,12 +5,12 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: dwk-cluster
+  GKE_CLUSTER: ooga-cluster
   GKE_ZONE: asia-south1-b
   REGISTRY: asia-south1-docker.pkg.dev
   REPOSITORY: kubesub
   IMAGE: the-app
-  SERVICE: dwk-environments
+  SERVICE: the-app
   BRANCH: ${{ github.ref_name }}
 
 jobs:
@@ -22,17 +22,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # This GitHub Action authenticates to Google Cloud.(authenticates via service account) https://github.com/google-github-actions/auth
       - uses: google-github-actions/auth@v2
         with:
           credentials_json: "${{ secrets.GKE_SA_KEY }}" # ✅ FIXED
 
+      # Configures the Google Cloud SDK includes the gcloud and gsutil binaries. https://github.com/google-github-actions/setup-gcloud
       - name: "Set up Cloud SDK"
         uses: google-github-actions/setup-gcloud@v2
 
       - name: "Use gcloud CLI"
         run: gcloud info
 
-      - run: gcloud --quiet auth configure-docker
+      - run: gcloud auth configure-docker
 
       - name: "Get GKE credentials"
         uses: google-github-actions/get-gke-credentials@v2
