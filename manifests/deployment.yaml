@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: dwk-environments
-          image: buddy00/the-app
+          image: PROJECT/IMAGE
